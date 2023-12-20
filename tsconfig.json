@@ -1,0 +1,16 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ],
+  "compilerOptions": {
+    "isolatedModules": true,
+    "types": ["element-plus/global", "vite-plugin-svg-icons/client"],
+    "jsx": "preserve"
+  }
+}

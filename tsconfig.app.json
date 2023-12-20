@@ -1,0 +1,14 @@
+// TODO: include 已配置，但导入仍报错问题(重启后不会报错)
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "exclude": ["src/**/__tests__/*"],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@images/*": ["./src/assets/images/*"]
+    }
+  }
+}
