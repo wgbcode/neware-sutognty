@@ -13,13 +13,7 @@
           <li class="c-fs14 c-opacity4">(2023.08.10)</li>
         </ul>
         <el-input v-model="username" placeholder="账号" class="c-mb12" />
-        <el-input
-          v-model="password"
-          type="password"
-          placeholder="密码"
-          show-password
-          class="c-mb12"
-        />
+        <el-input v-model="password" type="password" placeholder="密码" show-password class="c-mb12" />
         <div class="c-mb12 c-flex-between" v-show="loginCount === 1 ? false : true">
           <el-input v-model="userImageCode" placeholder="验证码" />
           <input type="button" class="imgCode" @click="createImgCode" v-model="imageCode" />
@@ -34,11 +28,8 @@
         <div class="c-flex-center c-mb12 c-relative c-h165">
           <img v-show="qrCodeURL" :src="qrCodeURL" class="c-w180" alt="" />
           <p v-show="!qrCodeURL" class="c-w180 c-h180" v-loading="true"></p>
-          <p
-            class="expireInfo c-absolute c-w180 c-h180 c-flex-center"
-            v-show="isExpireQRCode && qrCodeURL"
-            @click="toggleShade"
-          >
+          <p class="expireInfo c-absolute c-w180 c-h180 c-flex-center" v-show="isExpireQRCode && qrCodeURL"
+            @click="toggleShade">
             二维码失效，点击刷新
           </p>
         </div>
@@ -84,16 +75,20 @@ const getQRCode = () => {
   if (isQRCode.value) {
     isExpireQRCode.value = true
     GetLoginQRCode().then((res) => {
-      if (res.code === 0) {
-        // qrCodeURL.value = getImgURL(res.qrcode)
-        qrCodeURL.value = res.data.base64Img
+      const { result, message, code } = res
+      if (code === 200) {
+        const { img, codeId } = result
+        qrCodeURL.value = img
         isExpireQRCode.value = false
 
         // 轮询校验用户扫码情况
         pollCount.value = 0
         pollTimer.value = setInterval(async () => {
-          await ValidateLogin({ guid: res.data.guid }).then((res) => {
-            if (res.data.code === 0) {
+          await ValidateLogin({ codeId: codeId }).then((res) => {
+            const { code, result } = res
+            if (code === 200) {
+              setToken(result.erpToken)
+              authStore.setToken(result.erpToken)
               clearInterval(pollTimer.value)
               router.push({ path: '/layout' })
               pollCount.value = 0
@@ -188,18 +183,13 @@ const password = ref<string>('')
 const userLogin = () => {
   const valImageCode = loginCount.value !== 1 ? validateImageCode() : true
   if (!isQRCode.value && valImageCode) {
-    const params = { account: username.value ?? '', password: password.value ?? '' }
+    const params = { Account: username.value ?? '', Password: password.value ?? '', AppKey: 'openauth', from: 'browser' }
     Login(params).then((res) => {
-      const { code, message, data, refreshToken } = res
-      if (code === 0) {
-        setToken(data)
-        setRefreshToken(refreshToken)
-        authStore.setToken(data)
-        authStore.setRefreshToken(refreshToken)
-        ElMessage({
-          message: message,
-          type: 'success'
-        })
+      const { code, message, token } = res
+      if (code === 200) {
+        setToken(token)
+        authStore.setToken(token)
+        ElMessage({ message, type: 'success' })
         router.push({ path: '/layout' })
       } else {
         ElMessage.error(message)

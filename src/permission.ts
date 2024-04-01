@@ -1,9 +1,11 @@
 import router from '@/router'
 import { authStore } from '@/stores/auth'
 import { setToken, getToken } from '@/utils/auth'
-import { GetUserInfo } from '@/api/auth'
+import { GetModulesTree } from '@/api/auth'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { ElMessage } from 'element-plus'
+import { generateRoutes } from '@/utils/generateRoutes'
 
 let noAddRoutes = true
 
@@ -21,13 +23,17 @@ router.beforeEach(async (to) => {
   // token 存在
   const token = await getToken()
   if (token) {
-    // 动态路由加载(模拟)
-    GetUserInfo(token).then((res) => {
-      if (res.code === 1 && noAddRoutes) {
+    // 动态路由加载
+    GetModulesTree({ token }).then((res) => {
+      const { code, message, result } = res
+      if (code === 200 && noAddRoutes) {
         noAddRoutes = false
-        const willAddRoute = res.data
+        const willAddRoute = generateRoutes(result)
+        console.log('willAddRoute', willAddRoute)
         router.addRoute(willAddRoute)
         router.push({ ...to, replace: true })
+      } else {
+        ElMessage({ type: 'warning', message })
       }
     })
   }
