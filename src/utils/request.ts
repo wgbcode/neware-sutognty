@@ -5,6 +5,7 @@ import { setToken } from './auth'
 import { RefreshToken } from '@/api/auth'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
+import { getToken } from './auth'
 
 declare module 'axios' {
   // 定义实例参数类型和返回值类型
@@ -42,7 +43,7 @@ request.interceptors.request.use(
     config.isCancelRepeatRequest && setAbortMap(config)
 
     // 添加 token
-    authStore.token && (config.headers['X-Token'] = authStore.token)
+    getToken() && (config.headers['X-Token'] = getToken())
 
     // get 请求时序列化 params（可能为数组形式）
     config.method === 'get' &&

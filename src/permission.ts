@@ -7,8 +7,6 @@ import 'nprogress/nprogress.css'
 import { ElMessage } from 'element-plus'
 import { generateRoutes } from '@/utils/generateRoutes'
 
-let noAddRoutes = true
-
 // 配置全局前置守卫
 router.beforeEach(async (to) => {
   NProgress.start()
@@ -21,15 +19,14 @@ router.beforeEach(async (to) => {
   }
 
   // token 存在
-  const token = await getToken()
-  if (token) {
+  const token = getToken()
+  const isExitRouter = router.getRoutes().find((i) => i.name === 'layout')
+  if (token && !isExitRouter) {
     // 动态路由加载
     GetModulesTree({ token }).then((res) => {
       const { code, message, result } = res
-      if (code === 200 && noAddRoutes) {
-        noAddRoutes = false
+      if (code === 200) {
         const willAddRoute = generateRoutes(result)
-        console.log('willAddRoute', willAddRoute)
         router.addRoute(willAddRoute)
         router.push({ ...to, replace: true })
       } else {

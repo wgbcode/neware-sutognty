@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-sub-menu v-if="item.children" :index="item.path">
+    <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.path">
       <template #title>
         <Icon :name="item.meta.icon" color="#fff" size="18px" />
         <span class="c-ml5">{{ item.meta.title }}</span>

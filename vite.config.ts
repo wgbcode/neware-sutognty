@@ -58,7 +58,7 @@ export default defineConfig({
   server: {
     host: '127.0.0.1',
     port: 3000,
-    open: false,
+    open: true,
     hmr: true, // 热更新
     proxy: {
       '/api': {

@@ -92,10 +92,10 @@ const calculateLeft = async (isWheel: boolean, e?: WheelEvent) => {
       containerWidth > totalWidth
         ? 0
         : selectedLeft < scrollLeft.value
-        ? selectedLeft
-        : selectedLeft + selectedWidth > containerWidth
-        ? selectedLeft + selectedWidth - containerWidth
-        : 0
+          ? selectedLeft
+          : selectedLeft + selectedWidth > containerWidth
+            ? selectedLeft + selectedWidth - containerWidth
+            : 0
   } else {
     const newScrollLeft = Math.max(
       0,

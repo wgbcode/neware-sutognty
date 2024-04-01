@@ -12,17 +12,18 @@ export const app = createApp(App).use(pinia)
 export const authStore = defineStore('auth', () => {
   const token = ref<string>('')
   const refreshToken = ref<string>('')
-  const navRoutes = ref<RouteRecordRaw[]>([])
+  const navRoutes = ref<RouteRecordRaw>()
 
   const setToken = (newToken: string) => (token.value = newToken)
   const removeToken = () => (token.value = '')
   const setRefreshToken = (newRefreshToken: string) => (refreshToken.value = newRefreshToken)
   const removeRefreshToken = () => (refreshToken.value = '')
-  const setNavRoutes = (newNavRoutes: RouteRecordRaw[]) => (navRoutes.value = newNavRoutes)
+  const setNavRoutes = (newNavRoutes: RouteRecordRaw) => (navRoutes.value = newNavRoutes)
 
   return {
     token,
     refreshToken,
+    navRoutes,
     setToken,
     removeToken,
     setRefreshToken,

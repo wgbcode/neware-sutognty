@@ -1,10 +1,4 @@
 import request from '@/utils/request'
-import type { RouteRecordRaw } from 'vue-router'
-
-interface UserInfo {
-  code: number
-  data: RouteRecordRaw
-}
 
 // 登录
 export function Login(data: Record<string, string>) {

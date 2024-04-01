@@ -9,11 +9,17 @@
     <section class="login c-absolute-center c-w312 c-p30 c-br5">
       <div v-if="!isQRCode">
         <ul class="c-mb12 c-flex-ycenter">
-          <li class="c-fw700 c-fs18 c-mr5">WMS 5.0.0</li>
-          <li class="c-fs14 c-opacity4">(2023.08.10)</li>
+          <li class="c-fw700 c-fs18 c-mr5">NewAre</li>
+          <li class="c-fs14 c-opacity4"></li>
         </ul>
         <el-input v-model="username" placeholder="账号" class="c-mb12" />
-        <el-input v-model="password" type="password" placeholder="密码" show-password class="c-mb12" />
+        <el-input
+          v-model="password"
+          type="password"
+          placeholder="密码"
+          show-password
+          class="c-mb12"
+        />
         <div class="c-mb12 c-flex-between" v-show="loginCount === 1 ? false : true">
           <el-input v-model="userImageCode" placeholder="验证码" />
           <input type="button" class="imgCode" @click="createImgCode" v-model="imageCode" />
@@ -22,14 +28,17 @@
       </div>
       <div v-else>
         <ul class="c-mb12 c-flex-ycenter">
-          <li class="c-fw700 c-fs24 c-mr5">WMS 5.0.0</li>
-          <li class="c-fs14 c-opacity4 c-mt6">(2023.08.10)</li>
+          <li class="c-fw700 c-fs24 c-ml20">NewAre</li>
+          <li class="c-fs14 c-opacity4 c-mt6"></li>
         </ul>
         <div class="c-flex-center c-mb12 c-relative c-h165">
           <img v-show="qrCodeURL" :src="qrCodeURL" class="c-w180" alt="" />
           <p v-show="!qrCodeURL" class="c-w180 c-h180" v-loading="true"></p>
-          <p class="expireInfo c-absolute c-w180 c-h180 c-flex-center" v-show="isExpireQRCode && qrCodeURL"
-            @click="toggleShade">
+          <p
+            class="expireInfo c-absolute c-w180 c-h180 c-flex-center"
+            v-show="isExpireQRCode && qrCodeURL"
+            @click="toggleShade"
+          >
             二维码失效，点击刷新
           </p>
         </div>
@@ -55,7 +64,7 @@ import router from '@/router'
 import { onMounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Login, GetLoginQRCode, ValidateLogin } from '@/api/auth'
-import { setToken, setRefreshToken } from '@/utils/auth'
+import { setToken } from '@/utils/auth'
 // import { getImgURL } from '@/utils/common'
 import { authStore } from '@/stores/auth'
 import { useDark } from '@vueuse/core'
@@ -75,7 +84,7 @@ const getQRCode = () => {
   if (isQRCode.value) {
     isExpireQRCode.value = true
     GetLoginQRCode().then((res) => {
-      const { result, message, code } = res
+      const { result, code } = res
       if (code === 200) {
         const { img, codeId } = result
         qrCodeURL.value = img
@@ -183,7 +192,12 @@ const password = ref<string>('')
 const userLogin = () => {
   const valImageCode = loginCount.value !== 1 ? validateImageCode() : true
   if (!isQRCode.value && valImageCode) {
-    const params = { Account: username.value ?? '', Password: password.value ?? '', AppKey: 'openauth', from: 'browser' }
+    const params = {
+      Account: username.value ?? '',
+      Password: password.value ?? '',
+      AppKey: 'openauth',
+      from: 'browser'
+    }
     Login(params).then((res) => {
       const { code, message, token } = res
       if (code === 200) {
