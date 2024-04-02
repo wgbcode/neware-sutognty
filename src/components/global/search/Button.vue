@@ -1,5 +1,5 @@
 <template>
-    <el-button @click="on && on.click"> {{ text }}</el-button>
+    <el-button @click="on.click"> {{ text }}</el-button>
 </template>
 
 <script setup lang="ts">

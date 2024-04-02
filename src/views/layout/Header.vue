@@ -28,10 +28,6 @@
         @mouseout="restoreColor('color5')">
         <Icon name="setting" :color="color.color5" size="18px" class="c-mr5" />
       </div>
-      <div class="c-flex-ycenter c-mx10" @click="goSystem" @mouseover="changeColor('color5')"
-        @mouseout="restoreColor('color5')">
-        <Icon name="setting" :color="color.color5" size="18px" class="c-mr5" />
-      </div>
     </section>
   </div>
 </template>

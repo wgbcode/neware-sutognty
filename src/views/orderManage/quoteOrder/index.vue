@@ -1,12 +1,7 @@
 <template>
   <div>
     <c-search v-model:data="queryList" :config="searchConfig" />
-    <c-table
-      v-model:data="tableData"
-      :tableConfig="tableConfig"
-      :columnsConfig="columnsConfig"
-      class="c-flex-1"
-    >
+    <c-table v-model:data="tableData" :tableConfig="tableConfig" :columnsConfig="columnsConfig" class="c-flex-1">
     </c-table>
     <c-paginatin v-if="tableData.length > 0" v-model:data="pagData" @change="onSearch" />
   </div>

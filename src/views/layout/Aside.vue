@@ -19,7 +19,6 @@ import { onMounted, ref } from 'vue'
 const asideRoutes = ref<RouteRecordRaw[]>([])
 const handleMenuSelect = (path: string) => router.push({ path })
 onMounted(() => {
-  console.log(111222, router.getRoutes())
   asideRoutes.value = router.getRoutes().find((i) => i.name === 'vue3home')!.children!
 })
 </script>
