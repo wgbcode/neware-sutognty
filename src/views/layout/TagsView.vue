@@ -28,7 +28,7 @@
             size="12px"
             :color="tagColor(tag)"
             @click.prevent.stop="closeSelectedTag(tag)"
-            v-show="tag.name === 'Home' ? false : true"
+            v-show="tag.name === 'accountCenter' ? false : true"
           />
         </router-link>
       </div>
@@ -109,7 +109,7 @@ const closeSelectedTag = async (tag: RouteLocation) => {
   const tags = (await layoutStore.delVisitedViews(tag)) as RouteLocation[]
   if (isActive(tag)) {
     const lastTag = tags.slice(-1)[0]
-    lastTag ? router.push({ path: lastTag.path }) : router.push({ path: '/accountCenter/home' })
+    lastTag ? router.push({ path: lastTag.path }) : router.push({ path: '/accountCenter' })
   } else calculateLeft(false)
   menuData.visible = false
 }
@@ -119,7 +119,7 @@ const closeOtherTag = (tag: RouteLocation) => {
   menuData.visible = false
 }
 const closeAllTag = () => {
-  router.push({ path: '/accountCenter/home' })
+  router.push({ path: '/accountCenter' })
   layoutStore.delAllViews()
 }
 const refreshTag = async () => {
@@ -136,7 +136,7 @@ const openMenu = (tag: RouteLocation) => {
     if (item.to.path === tag.path) {
       $curTag = item.$el
       menuData.left = Math.max(10, $curTag.getBoundingClientRect().left - 180)
-      if (item.to.name === 'Home') menuData.visible = false
+      if (item.to.name === 'accountCenter') menuData.visible = false
     }
   })
 }

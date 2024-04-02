@@ -36,6 +36,7 @@ router.beforeEach(async (to) => {
     if (modulesTree) {
       const willAddRoute = generateRoutes(modulesTree)
       router.addRoute(willAddRoute) // 动态加载路由
+      console.log(router.getRoutes())
       router.push({ ...to, replace: true })
     }
   }

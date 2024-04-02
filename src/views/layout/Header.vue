@@ -47,6 +47,14 @@
           >安全退出</span
         >
       </div>
+      <div
+        class="c-flex-ycenter c-mx10"
+        @click="goSystem"
+        @mouseover="changeColor('color5')"
+        @mouseout="restoreColor('color5')"
+      >
+        <Icon name="setting" :color="color.color5" size="18px" class="c-mr5" />
+      </div>
     </section>
   </div>
 </template>
@@ -89,10 +97,14 @@ const color = reactive<Record<string, string>>({
   color1: '#fff',
   color2: '#fff',
   color3: '#fff',
-  color4: '#fff'
+  color4: '#fff',
+  color5: '#fff'
 })
 const changeColor = (key: string) => (color[key] = 'var(--tc-brand)')
 const restoreColor = (key: string) => (color[key] = '#fff')
+
+// 跳转到系统配置页
+const goSystem = () => router.push({ path: '/system' })
 
 onMounted(() => {
   localStorage.getItem('vueuse-color-scheme') === 'light'
