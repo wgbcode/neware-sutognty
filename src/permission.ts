@@ -22,17 +22,22 @@ router.beforeEach(async (to) => {
   const token = getToken()
   const isExitRouter = router.getRoutes().find((i) => i.name === 'layout')
   if (token && !isExitRouter) {
-    // 动态路由加载
-    GetModulesTree({ token }).then((res) => {
-      const { code, message, result } = res
-      if (code === 200) {
-        const willAddRoute = generateRoutes(result)
-        router.addRoute(willAddRoute)
-        router.push({ ...to, replace: true })
-      } else {
-        ElMessage({ type: 'warning', message })
+    const localStore = sessionStorage.getItem('WMSPINIASTATE')
+    let modulesTree = localStore && JSON.parse(localStore).auth.modulesTree
+    if (!modulesTree) {
+      try {
+        const res = await GetModulesTree({ token }) // 获取路由信息
+        const { code, message, result } = res
+        code === 200 ? (modulesTree = result) : ElMessage({ type: 'warning', message })
+      } catch (error) {
+        ElMessage({ type: 'error', message: error as string })
       }
-    })
+    }
+    if (modulesTree) {
+      const willAddRoute = generateRoutes(modulesTree)
+      router.addRoute(willAddRoute) // 动态加载路由
+      router.push({ ...to, replace: true })
+    }
   }
 
   // 重定向到登录页面，且避免无限重定向

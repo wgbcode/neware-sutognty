@@ -1,9 +1,9 @@
 import { type RouteRecordRaw } from 'vue-router'
-import { authStore } from '@/stores/auth'
+import { authStore, type ModuleTree } from '@/stores/auth'
 
 const modules = import.meta.glob('../views/*/*.vue')
 const navRoutes: RouteRecordRaw[] = []
-const getNewRouter = (data: Record<string, any>[], childrenPath?: RouteRecordRaw[]) => {
+const getNewRouter = (data: ModuleTree[], childrenPath?: RouteRecordRaw[]) => {
   data
     .sort((a, b) => a.item.sortNo - b.item.sortNo)
     .forEach((ele) => {
@@ -32,7 +32,8 @@ const getNewRouter = (data: Record<string, any>[], childrenPath?: RouteRecordRaw
     })
 }
 
-export const generateRoutes = (result: Record<string, any>[]): RouteRecordRaw => {
+export const generateRoutes = (result: ModuleTree[]): RouteRecordRaw => {
+  authStore.setModulesTree(result)
   getNewRouter(result)
   const willAddRoute = {
     path: '/layout',
@@ -40,6 +41,5 @@ export const generateRoutes = (result: Record<string, any>[]): RouteRecordRaw =>
     component: () => import('@/views/layout/index.vue'),
     children: navRoutes.filter((i) => i.name === 'vue3home')
   }
-  authStore.setNavRoutes(willAddRoute)
   return willAddRoute
 }

@@ -26,7 +26,4 @@ const globalComponentMap = {
 }
 registerComponent(globalComponentMap)
 
-app
-  .use(router)
-  .use(ElementPlus, { size: 'small', zIndex: 3000, locale: zhCn })
-  .mount('#app')
+app.use(router).use(ElementPlus, { size: 'small', zIndex: 3000, locale: zhCn }).mount('#app')

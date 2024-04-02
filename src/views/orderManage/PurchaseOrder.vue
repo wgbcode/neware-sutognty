@@ -1,6 +1,5 @@
 <template>
   <div>
-    <el-button @click="test">测试</el-button>
     <c-search v-model:data="queryList" :config="searchConfig" />
     <c-table
       v-model:data="tableData"
@@ -14,14 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { authStore } from '@/stores/auth'
 import { watch, shallowRef } from 'vue'
-import type { RouteRecordRaw } from 'vue-router'
 
 // 查询
-const test = () => {
-  authStore.setNavRoutes({} as RouteRecordRaw)
-}
 const onSearch = () => {
   console.log('查询参数1', queryList.value)
   console.log('查询参数2', pagData.value)
