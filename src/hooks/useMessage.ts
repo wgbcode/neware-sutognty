@@ -10,10 +10,9 @@ const useMessage = (verifyInfo: string) => {
   ]
   // 接收发过来的消息，并保存页面实例
   const handlerFn = (e: Record<string, any>) => {
-    console.log(111222, e)
     if (postOrigin.includes(e.origin) && e.data.verifyInfo === verifyInfo) {
-      messageInfo = { origin: e.origin, instance: e.source }
-      // 关闭本页面的定示器
+      messageInfo = { origin: e.origin, instance: e.source, data: e.data.data }
+      // 关闭本页面的定时器
       instance = e.source
       // 关闭另一个页面的定时器
       instance?.postMessage({ verifyInfo: 'clearInterval' }, e.origin)
