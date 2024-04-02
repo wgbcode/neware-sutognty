@@ -1,9 +1,10 @@
 <template>
   <div class="c-flex-column c-flex-1">
-    <TagsView ref="tagsView" />
+    <TagsView v-if="!appStore.isOnlyShowMain" ref="tagsView" />
     <router-view
       v-if="layoutStore.reloadRouter"
-      class="router-view c-absolute c-t28 c-b0 c-l0 c-r0 c-px10 c-pb5 c-pt10 c-flex-column c-overflow-auto"
+      class="router-view c-absolute c-b0 c-l0 c-r0 c-px10 c-pb5 c-pt10 c-flex-column c-overflow-auto"
+      :style="{ top: appStore.isOnlyShowMain ? '0' : '28px' }"
       v-slot="{ Component }"
     >
       <keep-alive :include="curRoutes">
@@ -18,6 +19,7 @@ import { ref, watch } from 'vue'
 import TagsView from './TagsView.vue'
 import { layoutStore } from '@/stores/layout'
 import { useRoute, useRouter } from 'vue-router'
+import { appStore } from '@/stores/app'
 
 const tagsView = ref<HTMLElement | null>(null)
 const route = useRoute()

@@ -1,8 +1,12 @@
 <template>
   <div class="c-h100p c-flex-column c-overflow-hidden">
-    <Header class="header c-h45" />
+    <Header v-if="!appStore.isOnlyShowMain" class="header c-h45" />
     <section class="c-flex-1 c-flex">
-      <Aside class="aside c-w180" v-show="layoutStore.isShowAside" />
+      <Aside
+        v-if="!appStore.isOnlyShowMain"
+        class="aside c-w180"
+        v-show="layoutStore.isShowAside"
+      />
       <Main class="c-flex-1 c-relative" />
     </section>
   </div>
@@ -13,6 +17,7 @@ import Header from './Header.vue'
 import Aside from './Aside.vue'
 import Main from './Main.vue'
 import { layoutStore } from '@/stores/layout'
+import { appStore } from '@/stores/app'
 </script>
 
 <style scoped lang="scss">

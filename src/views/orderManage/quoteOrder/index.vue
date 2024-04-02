@@ -14,6 +14,16 @@
 
 <script setup lang="ts">
 import { shallowRef, watch } from 'vue'
+import { messageInfo, useMessage } from '@/hooks/useMessage'
+
+// postMessage 测试
+useMessage('vue3frametest')
+const sendMessage = () => {
+  if (messageInfo) {
+    const { instance, origin } = messageInfo
+    instance.postMessage({ verifyInfo: 'backData', data: '来自Vue3框架' }, origin)
+  }
+}
 
 // 查询
 const onSearch = () => {
@@ -35,7 +45,8 @@ const searchConfig = [
   { name: 'select', prop: 'status', attr: { options: options1, placeholder: '状态' } },
   { name: 'input', prop: 'purOrder2', attr: { placeholder: '物料编码' } },
   { name: 'date', prop: 'searchDate', attr: { type: 'daterange' } },
-  { name: 'button', text: '查询', attr: { type: 'primary' }, on: { click: onSearch } }
+  { name: 'button', text: '查询', attr: { type: 'primary' }, on: { click: onSearch } },
+  { name: 'button', text: '测试', attr: { type: 'primary' }, on: { click: sendMessage } }
 ]
 
 // Table

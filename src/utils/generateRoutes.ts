@@ -25,7 +25,6 @@ const getNewRouter = (data: ModuleTree[], childrenPath?: RouteRecordRaw[]) => {
 }
 
 export const generateRoutes = (result: ModuleTree[]): RouteRecordRaw => {
-  console.log(modules)
   authStore.setModulesTree(result)
   getNewRouter(result)
   const willAddRoute = {
