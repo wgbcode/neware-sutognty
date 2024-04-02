@@ -1,5 +1,5 @@
 <template>
-  <div>我是系统设置页</div>
+    <div>我是系统设置页</div>
 </template>
 
 <script setup lang="tsx"></script>
