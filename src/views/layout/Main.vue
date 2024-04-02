@@ -1,12 +1,9 @@
 <template>
   <div class="c-flex-column c-flex-1">
     <TagsView v-if="!appStore.isOnlyShowMain" ref="tagsView" />
-    <router-view
-      v-if="layoutStore.reloadRouter"
-      class="router-view c-absolute c-b0 c-l0 c-r0 c-px10 c-pb5 c-pt10 c-flex-column c-overflow-auto"
-      :style="{ top: appStore.isOnlyShowMain ? '0' : '28px' }"
-      v-slot="{ Component }"
-    >
+    <router-view v-if="layoutStore.reloadRouter"
+      class="router-view c-absolute c-b0 c-l0 c-r0 c-px10 c-pb5 c-pt10 c-overflow-auto"
+      :style="{ top: appStore.isOnlyShowMain ? '0' : '28px' }" v-slot="{ Component }">
       <keep-alive :include="curRoutes">
         <component :is="Component" />
       </keep-alive>

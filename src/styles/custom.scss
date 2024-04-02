@@ -1,4 +1,4 @@
-// p = percent。c-w | c-h | c-wp | c-hp
+// width: p = percent。c-w | c-h | c-wp | c-hp
 @mixin generate-classes-wh($start, $end) {
   @for $i from $start through $end {
     $class-name-width: 'c-w#{$i}';
@@ -20,18 +20,19 @@
     $class-name-height: 'c-h#{$i}p';
 
     .#{$class-name-width} {
-      width: #{$i}+ '%';
+      width: #{$i}+'%';
     }
 
     .#{$class-name-height} {
-      height: #{$i}+ '%';
+      height: #{$i}+'%';
     }
   }
 }
+
 @include generate-classes-wh(0, 500);
 @include generate-classes-whp(0, 100);
 
-// p = percent。c-t | c-b | c-l | c-r | c-tp | c-bp | c-lp | c-rp
+// top|bottom|left|right: p = percent。c-t | c-b | c-l | c-r | c-tp | c-bp | c-lp | c-rp
 @mixin generate-classes-tblf($start, $end) {
   @for $i from $start through $end {
     $class-name-top: 'c-t#{$i}';
@@ -65,26 +66,27 @@
     $class-name-right: 'c-r#{$i}p';
 
     .#{$class-name-top} {
-      top: #{$i}+ '%';
+      top: #{$i}+'%';
     }
 
     .#{$class-name-bottom} {
-      bottom: #{$i}+ '%';
+      bottom: #{$i}+'%';
     }
 
     .#{$class-name-left} {
-      left: #{$i}+ '%';
+      left: #{$i}+'%';
     }
 
     .#{$class-name-right} {
-      right: #{$i}+ '%';
+      right: #{$i}+'%';
     }
   }
 }
+
 @include generate-classes-tblf(0, 500);
 @include generate-classes-tblfp(0, 100);
 
-// c-p | c-m | c-px | c-py | c-mx | c-my | c-pt | c-pb | c-pl | c-pr | c-mt | c-mb | c-ml | c-mr
+// padding|margin: c-p | c-m | c-px | c-py | c-mx | c-my | c-pt | c-pb | c-pl | c-pr | c-mt | c-mb | c-ml | c-mr
 @mixin generate-classes-pm($start, $end) {
   @for $i from $start through $end {
     $class-name-p: 'c-p#{$i}';
@@ -163,9 +165,10 @@
     }
   }
 }
+
 @include generate-classes-pm(0, 100);
 
-// n = negative。c-mtn | c-mbn | c-mln | c-mrn
+// margin: n = negative。c-mtn | c-mbn | c-mln | c-mrn
 @mixin generate-classes-mn($start, $end) {
   @for $i from $start through $end {
     $class-name-mt: 'c-mt#{$i}n';
@@ -176,20 +179,24 @@
     .#{$class-name-mt} {
       margin-top: #{-$i}px;
     }
+
     .#{$class-name-mb} {
       margin-bottom: #{-$i}px;
     }
+
     .#{$class-name-ml} {
       margin-left: #{-$i}px;
     }
+
     .#{$class-name-mr} {
       margin-right: #{-$i}px;
     }
   }
 }
+
 @include generate-classes-mn(0, 50);
 
-// c-fs
+// font-size: c-fs
 @mixin generate-classes-fs($start, $end) {
   @for $i from $start through $end {
     $class-name: 'c-fs#{$i}';
@@ -199,9 +206,10 @@
     }
   }
 }
+
 @include generate-classes-fs(12, 50);
 
-// c-fw
+// font-weight: c-fw
 @mixin generate-classes-fw($start, $end) {
   @for $i from $start through $end {
     $class-name: 'c-fw#{$i}';
@@ -211,9 +219,10 @@
     }
   }
 }
+
 @include generate-classes-fw(300, 700);
 
-// c-opacity
+// opacity: c-opacity
 @mixin generate-classes-opacity($start, $end) {
   @for $i from $start through $end {
     $class-name: 'c-opacity#{$i}';
@@ -223,9 +232,10 @@
     }
   }
 }
+
 @include generate-classes-opacity(0, 10);
 
-// c-br
+// border-radius: c-br
 @mixin generate-classes-br($start, $end) {
   @for $i from $start through $end {
     $class-name: 'c-br#{$i}';
@@ -235,6 +245,7 @@
     }
   }
 }
+
 @include generate-classes-br(0, 10);
 
 // flex
@@ -367,7 +378,7 @@
   transform: translateY(-50%);
 }
 
-// scrollBar
+// overflow
 .c-overflow-auto {
   overflow: auto;
 }
@@ -404,7 +415,7 @@
   overflow-y: scroll;
 }
 
-// c-cwhite | c-bwhite | c-cblack | c-black
+// color|background-color: c-cwhite | c-bwhite | c-cblack | c-black
 .c-cwhite {
   color: white;
 }
@@ -421,7 +432,7 @@
   background-color: black;
 }
 
-// c-forbidSelect
+// select: c-forbidSelect
 .c-forbidSelect {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -429,12 +440,12 @@
   user-select: none;
 }
 
-// c-white-nowrap
+// white-space: c-white-nowrap
 .c-white-nowrap {
   white-space: nowrap;
 }
 
-// c-block | c-inline | c-inline-block
+// display: c-block | c-inline | c-inline-block
 .c-block {
   display: block;
 }

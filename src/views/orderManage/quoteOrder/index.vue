@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="c-flex-column">
     <c-search v-model:data="queryList" :config="searchConfig" />
     <c-table v-model:data="tableData" :tableConfig="tableConfig" :columnsConfig="columnsConfig" class="c-flex-1">
     </c-table>
