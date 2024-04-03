@@ -15,7 +15,6 @@ const useMessage = (verifyInfo: string) => {
     'https://bi.neware.com.cn',
     'http://localhost:1803'
   ]
-  // 接收发过来的消息，并保存页面实例
   const handlerFn = (e: MessageEvent) => {
     if (postOrigin.includes(e.origin) && e.data.verifyInfo === verifyInfo) {
       messageInfo = { origin: e.origin, instance: e.source!, data: e.data.data }
@@ -25,6 +24,7 @@ const useMessage = (verifyInfo: string) => {
       instance?.postMessage({ verifyInfo: 'clearInterval' }, { targetOrigin: e.origin })
     }
   }
+  // 接收发过来的消息，并保存页面实例、源页面地址、初始化数据
   window.addEventListener('message', handlerFn)
   let timer: null | number = setInterval(() => {
     if (instance) {

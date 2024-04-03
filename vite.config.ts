@@ -4,9 +4,9 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import path from 'path'
-import { visualizer } from 'rollup-plugin-visualizer'
 import viteCompression from 'vite-plugin-compression'
-import { CodeInspectorPlugin } from 'code-inspector-plugin'
+// import { visualizer } from 'rollup-plugin-visualizer'
+// import { CodeInspectorPlugin } from 'code-inspector-plugin'
 
 export default defineConfig({
   base: './',
@@ -25,9 +25,9 @@ export default defineConfig({
         ]
       }
     }),
-    visualizer({ open: true }), // 生成 start.html
-    // 文件压缩。https://github.com/vbenjs/vite-plugin-compression/blob/main/README.zh_CN.md
-    // 服务器发现请求资源为gzip格式时，应设置响应头content-encoding:gzip
+    // 代码体积分析
+    // visualizer({ open: true }),
+    // 文件压缩
     viteCompression({
       verbose: true,
       disable: false,
@@ -35,11 +35,9 @@ export default defineConfig({
       algorithm: 'gzip',
       ext: '.gz',
       deleteOriginFile: true
-    }),
-    // 代码快速定位。https://inspector.fe-dev.cn/guide/start.html
-    CodeInspectorPlugin({
-      bundler: 'vite'
     })
+    // 代码快速定位
+    // CodeInspectorPlugin({bundler: 'vite'})
   ],
   resolve: {
     alias: {
@@ -58,12 +56,11 @@ export default defineConfig({
   server: {
     host: 'localhost',
     port: 3000,
-    open: true,
+    open: false,
     hmr: true, // 热更新
     proxy: {
       '/api': {
         target: 'https://nsapgateway.neware.work/api',
-        // target: 'https://www.fastmock.site/mock/e68d869253f9e376375eb399ba932142/newarewms',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
@@ -81,8 +78,8 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        assetFileNames: '[ext]/[name]-[hash].[ext]', // 资源文件，包括图片、字体、css等
-        entryFileNames: 'js/[name]-[hash].js', // chunks 入口文件，即 index.js
+        assetFileNames: '[ext]/[name]-[hash].[ext]', // 资源文件
+        entryFileNames: 'js/[name]-[hash].js', // chunks 入口文件
         chunkFileNames: (chunkInfo) => {
           const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') : []
           const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]'

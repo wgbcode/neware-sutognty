@@ -14,16 +14,16 @@
 
 <script setup lang="ts">
 import { shallowRef, watch } from 'vue'
-import { messageInfo, useMessage } from '@/hooks/useMessage'
+// import { messageInfo, useMessage } from '@/hooks/useMessage'
 
 // postMessage 测试
-useMessage('acceptPaybacks')
-const sendMessage = () => {
-  if (messageInfo) {
-    const { instance, origin } = messageInfo
-    instance.postMessage({ verifyInfo: 'backData', data: '来自Vue3框架' }, { targetOrigin: origin })
-  }
-}
+// useMessage('acceptPaybacks')
+// const sendMessage = () => {
+//   if (messageInfo) {
+//     const { instance, origin } = messageInfo
+//     instance.postMessage({ verifyInfo: 'backData', data: '来自Vue3框架' }, { targetOrigin: origin })
+//   }
+// }
 
 // 查询
 const onSearch = () => {
@@ -41,22 +41,34 @@ const options1 = [
   { value: 4, label: '已结标' }
 ]
 const searchConfig = [
-  { name: 'input', prop: 'purOrder', attr: { placeholder: '报价单号' } },
-  { name: 'select', prop: 'status', attr: { options: options1, placeholder: '状态' } },
-  { name: 'input', prop: 'purOrder2', attr: { placeholder: '物料编码' } },
-  { name: 'date', prop: 'searchDate', attr: { type: 'daterange' } },
+  { name: 'select', prop: 'test1', attr: { options: options1, placeholder: '标识' } },
+  { name: 'input', prop: 'test2', attr: { placeholder: '收款单号' } },
+  { name: 'input', prop: 'test3', attr: { placeholder: '销售订单号' } },
+  { name: 'input', prop: 'test4', attr: { placeholder: '客户代码/名称' } },
+  { name: 'select', prop: 'test6', attr: { options: options1, placeholder: '状态' } },
   { name: 'button', text: '查询', attr: { type: 'primary' }, on: { click: onSearch } },
-  { name: 'button', text: '测试', attr: { type: 'primary' }, on: { click: sendMessage } }
+  { name: 'button', text: '新增', attr: { type: 'primary' }, on: { click: onSearch } },
+  { name: 'button', text: '修改', attr: { type: 'primary' }, on: { click: onSearch } },
+  { name: 'button', text: '退款', attr: { type: 'primary' }, on: { click: onSearch } }
 ]
 
 // Table
 const tableData = shallowRef(
   Array.from({ length: 50 }).map((_, idx) => ({
     id: idx,
-    date: '待报价',
-    name: '	M103-18-TP-RKS-6A-8CH',
-    address: 'PQ-20900',
-    number: '2023.10.11 14:02:12'
+    test1: '12345678',
+    test2: 'SE-123456',
+    test3: 'C10000',
+    test4: '测试公司',
+    test5: 199888,
+    test6: 111444,
+    test7: 199999,
+    test8: '张三',
+    test9: '已打印',
+    test10: '新威尔',
+    test11: '',
+    test12: '2023-10-11 14:02:12',
+    test13: ''
   }))
 )
 const tableConfig = {
@@ -66,10 +78,19 @@ const tableConfig = {
 const columnsConfig = [
   { type: 'selection' },
   { slotName: 'index' },
-  { label: '报价单号', prop: 'address', width: '120', slotName: 'addArrow' },
-  { label: '状态', prop: 'date', width: '70' },
-  { label: '物料编码', prop: 'name', width: '180' },
-  { label: '创建时间', prop: 'number', width: '150' }
+  { label: '收据号', prop: 'test1', width: '100', slotName: 'addArrow' },
+  { label: '销售订单号', prop: 'test2', width: '100', slotName: 'addArrow' },
+  { label: '业务伙伴代码', prop: 'test3', width: '100', slotName: 'addArrow' },
+  { label: '业务伙伴名称', prop: 'test4', width: '100' },
+  { label: '销售订单金额', prop: 'test5', width: '100', slotName: 'price' },
+  { label: '收据金额', prop: 'test6', width: '100', slotName: 'price' },
+  { label: '退款金额', prop: 'test7', width: '100', slotName: 'price' },
+  { label: '销售员', prop: 'test8', width: '80', slotName: 'addArrow' },
+  { label: '状态', prop: 'test9', width: '80' },
+  { label: '标识', prop: 'test10', width: '80' },
+  { label: '账户信息', prop: 'test11', width: '100' },
+  { label: '更新时间', prop: 'test12', width: '150', slotName: 'datetime' },
+  { label: '备注', prop: 'test13', width: '150' }
 ]
 
 // pagination

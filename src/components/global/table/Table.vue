@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="data" :tableConfig="tableConfig" v-on="tableConfig.on">
+  <el-table :data="data" v-bind="tableConfig" v-on="tableConfig.on">
     <template v-for="(item, index) in columnsConfig" :key="index">
       <TableColumn :config="item" :data="data" v-bind="$attrs">
         <!-- 插槽向下传递 -->

@@ -9,9 +9,9 @@ import { pinia } from '@/stores/auth'
 import { reactive, watch } from 'vue'
 
 // pinia 数据持久化(可优化，看项目需求)
-const localStore = sessionStorage.getItem('WMSPINIASTATE')
+const localStore = sessionStorage.getItem('VU3PINIASTATE')
 localStore && (pinia.state.value = reactive(JSON.parse(localStore)))
-watch(pinia.state, (state) => sessionStorage.setItem('WMSPINIASTATE', JSON.stringify(state)), {
+watch(pinia.state, (state) => sessionStorage.setItem('VU3PINIASTATE', JSON.stringify(state)), {
   deep: true
 })
 </script>

@@ -29,7 +29,7 @@ router.beforeEach(async (to) => {
   const token = getToken()
   const isExitRouter = router.getRoutes().find((i) => i.name === 'layout')
   if (token && !isExitRouter) {
-    const localStore = sessionStorage.getItem('WMSPINIASTATE')
+    const localStore = sessionStorage.getItem('VU3PINIASTATE')
     let modulesTree = localStore && JSON.parse(localStore).auth.modulesTree
     if (!modulesTree) {
       try {

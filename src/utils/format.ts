@@ -61,7 +61,7 @@ export function dateFormat(value: string | Date | null | undefined, format = 'YY
       return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
     case 'YYYY.MM.DD':
       return `${year}.${month}.${day}`
-    case 'YYYY.MM.dd HH:mm:ss':
+    case 'YYYY.MM.DD HH:mm:ss':
       return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`
     default:
       throw new Error(`Unsupported format "${format}"`)
