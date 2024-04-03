@@ -1,6 +1,11 @@
-let messageInfo: undefined | Record<string, any>
+interface MessageInfo {
+  origin: string
+  instance: MessageEventSource
+  data: unknown
+}
+let instance: null | MessageEventSource
+let messageInfo: null | MessageInfo
 const useMessage = (verifyInfo: string) => {
-  let instance: undefined | Record<string, any>
   const postOrigin = [
     'http://erp.neware.com.cn',
     'https://erp.neware.com.cn',
@@ -9,13 +14,13 @@ const useMessage = (verifyInfo: string) => {
     'http://localhost:1803'
   ]
   // 接收发过来的消息，并保存页面实例
-  const handlerFn = (e: Record<string, any>) => {
+  const handlerFn = (e: MessageEvent) => {
     if (postOrigin.includes(e.origin) && e.data.verifyInfo === verifyInfo) {
-      messageInfo = { origin: e.origin, instance: e.source, data: e.data.data }
+      messageInfo = { origin: e.origin, instance: e.source!, data: e.data.data }
       // 关闭本页面的定时器
       instance = e.source
       // 关闭另一个页面的定时器
-      instance?.postMessage({ verifyInfo: 'clearInterval' }, e.origin)
+      instance?.postMessage({ verifyInfo: 'clearInterval' }, { targetOrigin: e.origin })
     }
   }
   window.addEventListener('message', handlerFn)

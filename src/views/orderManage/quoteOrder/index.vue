@@ -16,7 +16,7 @@ useMessage('vue3frametest')
 const sendMessage = () => {
   if (messageInfo) {
     const { instance, origin } = messageInfo
-    instance.postMessage({ verifyInfo: 'backData', data: '来自Vue3框架' }, origin)
+    instance.postMessage({ verifyInfo: 'backData', data: '来自Vue3框架' }, { targetOrigin: origin })
   }
 }
 
