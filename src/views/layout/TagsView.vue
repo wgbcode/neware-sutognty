@@ -1,21 +1,43 @@
 <template>
-  <div class="tags-container c-relative c-forbidSelect" ref="scrollContainer"
-    @wheel.prevent="calculateLeft(true, $event)">
-    <div class="tags-wrapper c-w100p c-white-nowrap c-relative c-overflow-hidden c-h28" ref="scrollWrapper">
+  <div
+    class="tags-container c-relative c-forbidSelect"
+    ref="scrollContainer"
+    @wheel.prevent="calculateLeft(true, $event)"
+  >
+    <div
+      class="tags-wrapper c-w100p c-white-nowrap c-relative c-overflow-hidden c-h28"
+      ref="scrollWrapper"
+    >
       <div class="c-absolute c-flex" ref="scrollWrapper" :style="{ left: -scrollLeft + 'px' }">
-        <router-link ref="tags" class="tags-item c-inline-block c-flex-ycenter c-px8 c-py0 c-mr1 c-fs12"
-          :class="isActive(tag) ? 'active' : ''" v-for="(tag, index) in visitedViews" :to="tag"
-          :key="`${index}_${tag.path}`" @contextmenu.prevent="openMenu(tag)" @click="() => (menuData.visible = false)">
+        <router-link
+          ref="tags"
+          class="tags-item c-inline-block c-flex-ycenter c-px8 c-py0 c-mr1 c-fs12"
+          :class="isActive(tag) ? 'active' : ''"
+          v-for="(tag, index) in visitedViews"
+          :to="tag"
+          :key="`${index}_${tag.path}`"
+          @contextmenu.prevent="openMenu(tag)"
+          @click="() => (menuData.visible = false)"
+        >
           <span class="c-mr2" :style="{ color: tagColor(tag) }">{{
-      tag.meta?.title ?? '主页'
-    }}</span>
-          <Icon class="c-mb2n" name="close" size="12px" :color="tagColor(tag)"
-            @click.prevent.stop="closeSelectedTag(tag)" v-show="tag.name === 'accountCenter' ? false : true" />
+            tag.meta?.title ?? '主页'
+          }}</span>
+          <Icon
+            class="c-mb2n"
+            name="close"
+            size="12px"
+            :color="tagColor(tag)"
+            @click.prevent.stop="closeSelectedTag(tag)"
+            v-show="tag.name === 'accountCenter' ? false : true"
+          />
         </router-link>
       </div>
     </div>
-    <ul class="contextmenu c-absolute" v-show="menuData.visible"
-      :style="{ left: menuData.left + 'px', top: menuData.top + 'px', zIndex: 9999 }">
+    <ul
+      class="contextmenu c-absolute"
+      v-show="menuData.visible"
+      :style="{ left: menuData.left + 'px', top: menuData.top + 'px', zIndex: 9999 }"
+    >
       <li @click="closeSelectedTag(menuData.selectedTag)">关闭本页面</li>
       <li @click="closeOtherTag(menuData.selectedTag)">关闭其他</li>
       <li @click="closeAllTag">全部关闭</li>
@@ -125,12 +147,16 @@ const tagColor = (tag: RouteLocation) => {
 onMounted(() => router.currentRoute.value.name === 'layout' && closeAllTag())
 
 // 路由变换时重新渲染 tagsView 组件
-watch(route, (to) => {
-  const existRouter = visitedViews.map((i) => i.name).includes(to.name)
-  !existRouter && layoutStore.addVisitedViews(deepClone(to))
-  calculateLeft(false)
-  menuData.visible = false
-})
+watch(
+  route,
+  (to) => {
+    const existRouter = visitedViews.map((i) => i.name).includes(to.name)
+    !existRouter && layoutStore.addVisitedViews(deepClone(to))
+    calculateLeft(false)
+    menuData.visible = false
+  }
+  // { immediate: true }
+)
 </script>
 
 <style scoped lang="scss">

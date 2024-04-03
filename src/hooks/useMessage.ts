@@ -3,6 +3,8 @@ interface MessageInfo {
   instance: MessageEventSource
   data: unknown
 }
+
+// 使用 postMessag 实现跨系统通讯
 let instance: null | MessageEventSource
 let messageInfo: null | MessageInfo
 const useMessage = (verifyInfo: string) => {
