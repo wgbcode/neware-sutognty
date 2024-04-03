@@ -1,13 +1,12 @@
 import router from '@/router'
 import { authStore } from '@/stores/auth'
 import { appStore } from '@/stores/app'
-import { setToken, getToken } from '@/utils/auth'
+import { getToken } from '@/utils/auth'
 import { GetModulesTree } from '@/api/auth'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { ElMessage } from 'element-plus'
 import { generateRoutes } from '@/utils/generateRoutes'
-import { useDark, useToggle } from '@vueuse/core'
 
 // 配置全局前置守卫
 router.beforeEach(async (to) => {
@@ -16,17 +15,14 @@ router.beforeEach(async (to) => {
   // 路径中有 token 时，保存 token
   const queryToken = to.query['token'] as string
   if (queryToken) {
-    setToken(queryToken)
+    // token 保存到全局
     authStore.setToken(queryToken)
     // 通过路径登录时，只展示内容区域，隐藏顶栏、侧边栏和 Tab 栏
     appStore.saveIsOnlyShowMain(true)
-    // 主题切换成黑色
-    const isDark = useDark({ valueDark: 'dark', valueLight: 'light' })
-    useToggle(isDark)()
   }
 
   // token 存在
-  const token = getToken()
+  const token = getToken() || authStore.token
   const isExitRouter = router.getRoutes().find((i) => i.name === 'layout')
   if (token && !isExitRouter) {
     const localStore = sessionStorage.getItem('VU3PINIASTATE')

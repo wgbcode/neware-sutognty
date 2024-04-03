@@ -14,10 +14,11 @@
 
 <script setup lang="ts">
 import { shallowRef, watch } from 'vue'
-// import { messageInfo, useMessage } from '@/hooks/useMessage'
+import { useMessage } from '@/hooks/useMessage'
 
-// postMessage 测试
-// useMessage('acceptPaybacks')
+// 建立 postMessage 连接
+useMessage('acceptPaybacks')
+// 通过 postMessage 回传消息
 // const sendMessage = () => {
 //   if (messageInfo) {
 //     const { instance, origin } = messageInfo

@@ -43,7 +43,8 @@ request.interceptors.request.use(
     config.isCancelRepeatRequest && setAbortMap(config)
 
     // 添加 token
-    getToken() && (config.headers['X-Token'] = getToken())
+    const token = getToken() || authStore.token
+    token && (config.headers['X-Token'] = token)
 
     // get 请求时序列化 params（可能为数组形式）
     config.method === 'get' &&

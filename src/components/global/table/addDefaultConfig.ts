@@ -14,7 +14,6 @@ export const addTableDefaultConfig = (tableConfig: TableConfig | undefined) => {
     config['show-summary'] = true
     config['summary-method'] = getSummaries(config.footerMethod!)
   }
-  console.log('config', config)
   return config
 }
 
