@@ -20,22 +20,20 @@ const getNewRouter = (data: ModuleTree[], childrenPath?: RouteRecordRaw[]) => {
     data
         .sort((a, b) => a.item.sortNo - b.item.sortNo)
         .forEach((ele) => {
-            let key = ''
+            let key = '', newUrl = ''
             const { item, children } = ele
             const { code, name, url, iconName } = item
-            // 系统设置
             if (code === 'systemSetting') {
+                // 系统设置菜单
+                newUrl = '/system'
                 key = '../views/system/index.vue'
             } else {
+                // path 首字母转小写，并删除后缀 index|Index
+                newUrl = lowerFirstLetter(url).replace('/index', '').replace('/Index', '')
                 key = `../views${url}/index.vue`
-                // 路径存在后缀处理
-                url.includes('index') && (key = `../views${url}.vue`)
-                url.includes('Index') && (key = `../views${url.replace('Index', 'index')}.vue`)
-                // 路径首字母转小写
-                key = lowerFirstLetter(key)
             }
             const obj = {
-                path: url,
+                path: newUrl,
                 name: code,
                 meta: { title: name, icon: iconName, hidden: false },
                 component: modules[key],
