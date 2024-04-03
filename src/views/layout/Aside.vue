@@ -28,6 +28,7 @@ const handleMenuSelect = (path: string) => router.push({ path })
 onMounted(() => {
   const matchName = props.isSystem ? "systemSetting" : 'vue3home'
   const matchData = router.getRoutes().find((i) => i.name === matchName)!.children!
+  console.log(matchData.filter(i => ["BaseConfig"].includes(i.name as string)))
   asideRoutes.value = props.isSystem ? matchData.filter(i => ["BaseConfig"].includes(i.name as string)) : matchData
 })
 </script>

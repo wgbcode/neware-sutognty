@@ -77,7 +77,7 @@ const changeColor = (key: string) => (color[key] = 'var(--tc-brand)')
 const restoreColor = (key: string) => (color[key] = '#fff')
 
 // 跳转到系统配置页
-const goSystem = () => router.push({ path: '/system' })
+const goSystem = () => router.push({ name: 'systemSetting' })
 
 onMounted(() => {
   localStorage.getItem('vueuse-color-scheme') === 'light'
