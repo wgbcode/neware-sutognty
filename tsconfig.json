@@ -9,8 +9,29 @@
     }
   ],
   "compilerOptions": {
+    // "baseUrl": "./",
+    // "paths": {
+    //   "@/*": [
+    //     "src/*"
+    //   ],
+    //   "@": [
+    //     "src"
+    //   ],
+    // },
     "isolatedModules": true,
-    "types": ["element-plus/global", "vite-plugin-svg-icons/client"],
+    "types": [
+      "element-plus/global",
+      "vite-plugin-svg-icons/client"
+    ],
     "jsx": "preserve"
-  }
+  },
+  // "include": [
+  //   "src/**/*.ts",
+  //   "src/**/*.d.ts",
+  //   "src/**/*.tsx",
+  //   "src/**/*.vue"
+  // ],
+  // "exclude": [
+  //   "node_modules"
+  // ]
 }

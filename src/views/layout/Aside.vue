@@ -1,19 +1,9 @@
 <template>
   <div>
     <el-row>
-      <el-menu
-        default-active="/accountCenter/home"
-        asideRoutes
-        :unique-opened="true"
-        text-color="#fff"
-        @select="handleMenuSelect"
-      >
-        <AsideItem
-          v-for="route in asideRoutes"
-          :key="route.name"
-          :item="route"
-          class="c-forbidSelect"
-        />
+      <el-menu :default-active="defaultActive" asideRoutes :unique-opened="true" text-color="#fff"
+        @select="handleMenuSelect">
+        <AsideItem v-for="route in asideRoutes" :key="route.name" :item="route" class="c-forbidSelect" />
       </el-menu>
     </el-row>
     <div v-if="!isSystem" class="c-flex-center c-mb10">
@@ -35,9 +25,11 @@ const props = defineProps({
   }
 })
 
+const defaultActive = ref<string>()
 const asideRoutes = ref<RouteRecordRaw[]>([])
 const handleMenuSelect = (path: string) => router.push({ path })
 onMounted(() => {
+  defaultActive.value = props.isSystem ? '/moduleManager' : '/accountCenter'
   const matchName = props.isSystem ? 'systemSetting' : 'vue3home'
   const matchData = router.getRoutes().find((i) => i.name === matchName)!.children!
   asideRoutes.value = props.isSystem

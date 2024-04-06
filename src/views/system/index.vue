@@ -1,12 +1,15 @@
 <template>
     <div class="wrapper c-flex">
         <Aside class="aside" :isSystem="true" />
-        <div class="c-flex-1 c-p10">我是系统设置页</div>
+        <router-view class="c-flex-1 c-p10" />
     </div>
 </template>
 
 <script setup lang="tsx">
+import router from '@/router';
 import Aside from '@/views/layout/Aside.vue';
+import { onMounted } from 'vue';
+onMounted(() => router.push({ path: '/moduleManager' }))
 </script>
 
 <style lang="scss" scoped>
