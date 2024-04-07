@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="tsx">
-import LeftCard from './LeftCard.vue'
-import RightCard from './RightCard.vue'
+import LeftCard from './components/LeftCard.vue'
+import RightCard from './components/RightCard.vue'
 </script>
 
 <style scoped lang="scss"></style>
