@@ -25,8 +25,9 @@ router.beforeEach(async (to) => {
   const token = getToken() || authStore.token
   const isExitRouter = router.getRoutes().find((i) => i.name === 'layout')
   if (token && !isExitRouter) {
-    const localStore = sessionStorage.getItem('VU3PINIASTATE')
-    let modulesTree = localStore && JSON.parse(localStore).auth.modulesTree
+    // const localStore = sessionStorage.getItem('VU3PINIASTATE')
+    // let modulesTree = localStore && JSON.parse(localStore).auth.modulesTree
+    let modulesTree: any = false
     if (!modulesTree) {
       try {
         const res = await GetModulesTree({ token }) // 获取路由信息

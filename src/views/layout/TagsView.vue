@@ -52,7 +52,6 @@ import { useRoute, type RouteLocation } from 'vue-router'
 import { layoutStore } from '@/stores/layout'
 import { appStore } from '@/stores/app'
 import router from '@/router'
-import { deepClone } from '@/utils/common'
 
 type MenuData = {
   visible: boolean
@@ -151,7 +150,7 @@ watch(
   route,
   (to) => {
     const existRouter = visitedViews.map((i) => i.name).includes(to.name)
-    !existRouter && layoutStore.addVisitedViews(deepClone(to))
+    existRouter || layoutStore.addVisitedViews({ ...to })
     calculateLeft(false)
     menuData.visible = false
   }
