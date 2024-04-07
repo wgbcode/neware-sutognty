@@ -1,5 +1,5 @@
 <template>
-    <el-input @keyup.enter="on && on.keyup" />
+  <el-input @keyup.enter="on && on.keyup" />
 </template>
 
 <script setup lang="ts">

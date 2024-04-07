@@ -37,7 +37,16 @@
 .el-table {
   .el-table__header {
     th.el-table__cell {
-      line-height: 23px;
+      height: 20px;
+      line-height: 20px;
+      padding: 0;
+      background-color: var(--tc-th-background);
+      color: var(--tc-th-text);
+      border-color: var(--tc-cell-border);
+      .cell {
+        height: 20px;
+        line-height: 20px;
+      }
     }
   }
   .el-table__body {
@@ -49,30 +58,33 @@
       --el-table-tr-bg-color: var(--el-color-success-light-9);
       --el-fill-color-lighter: var(--el-color-success-light-9);
     }
-    td.el-table__cell {
-      transition: none;
-      .el-input,
-      .el-input-number,
-      .el-select-v2,
-      .el-select-v2__wrapper,
-      .el-select,
-      .el-input-number__decrease,
-      .el-input-number__increase,
-      .el-input__inner {
-        height: 16px;
-        border: none;
-        --el-input-border-color: transparent;
-        --el-input-hover-border-color: transparent;
-        --el-input-focus-border-color: transparent;
-        --el-select-border-color-hover: transparent;
-        --el-select-input-focus-border-color: transparent;
-        .el-select-v2__placeholder.is-transparent {
-          height: 16px;
-          line-height: 16px;
+    tr.el-table__row {
+      td.el-table__cell {
+        transition: none;
+        .el-input,
+        .el-input-number,
+        .el-select-v2,
+        .el-select-v2__wrapper,
+        .el-select,
+        .el-input-number__decrease,
+        .el-input-number__increase,
+        .el-input__inner {
+          height: 20px;
+          border: none;
+          --el-input-border-color: transparent;
+          --el-input-hover-border-color: transparent;
+          --el-input-focus-border-color: transparent;
+          --el-select-border-color-hover: transparent;
+          --el-select-input-focus-border-color: transparent;
+          .el-select-v2__placeholder.is-transparent {
+            height: 20px;
+            line-height: 20px;
+          }
         }
-      }
-      .cell {
-        line-height: 16px;
+        .cell {
+          height: 20px;
+          line-height: 20px;
+        }
       }
     }
   }

@@ -60,6 +60,18 @@ html.dark {
   --tc-table-header: #525252;
   --tc-navbar-border: #525252;
   --tc-tooltip: #c7c7c7;
+  // table
+  --tc-table-empty: #262626; // 空白表格底色
+  --tc-cell-form: #262626; // 表格表单样式7CC6
+  --tc-th-background: #525252; // 表格表头底色
+  --tc-th-text: #c2c2c2; // 表格表头文字
+  --tc-tr-odd: #000000; // 表格奇行
+  --tc-tr-even: #1a1a1a; // 表格偶行
+  --tc-cell-border: #333333; // 单元格描边
+  --tc-cell-disable: #262626; // 单元格禁用
+  --tc-cell-hover: #4d4d4d; // 单元格悬停
+  --tc-cell-selected: #0063b1; // 单元格选中
+  --tc-cell-selected-text: #e6e6e6; // 单元格选中时的文字颜色
   // custom
   --tc-pagination: #464343;
   --tc-card-header: #333;

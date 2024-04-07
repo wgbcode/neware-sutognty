@@ -56,3 +56,5 @@ const newConfig = addDefaultConfig(props.config)
 const emit = defineEmits(['update:data'])
 const newData = useVModel(props, 'data', emit)
 </script>
+
+<style scoped lang="scss"></style>

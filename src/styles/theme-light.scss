@@ -60,6 +60,18 @@ html.light {
   --tc-table-header: #c9c9c9;
   --tc-navbar-border: #333;
   --tc-tooltip: #4d4d4d;
+  // table
+  --tc-table-empty: #ffffff; // 空白表格底色
+  --tc-cell-form: #ffffff; // 表格表单样式
+  --tc-th-background: #c9c9c9; // 表格表头底色
+  --tc-th-text: #4d4d4d; // 表格表头文字
+  --tc-tr-odd: #ffffff; // 表格奇行
+  --tc-tr-even: #f2f2f2; // 表格偶行
+  --tc-cell-border: #e3e3e3; // 单元格描边
+  --tc-cell-disable: #e8e8e8; // 单元格禁用
+  --tc-cell-hover: #ffffc9; // 单元格悬停
+  --tc-cell-selected: #fdfdaf; // 单元格选中
+  --tc-cell-selected-text: #1a1a1a; // 单元格选中时的文字颜色
   // custom
   --tc-pagination: #efeff3;
   --tc-card-header: #f2f2f2;
