@@ -3,7 +3,7 @@
         <template #name="scope">
             <div style="display: flex; align-items: center">
                 <el-radio v-if="scope.parentId" :model-value="radioId" :label="scope.id" size="large"
-                    @change="radioChange(scope.id)">{{ scope.name }}</el-radio>
+                    @change="radioChange(scope)">{{ scope.name }}</el-radio>
                 <span v-else> {{ scope.name }}</span>
             </div>
         </template>
@@ -23,7 +23,7 @@ const props = defineProps({
 
 // 单选框
 const radioId = ref<string>()
-const radioChange = (value: string) => radioId.value = value
+const radioChange = (row: Modules) => radioId.value = row.id
 
 // 表格
 const tableConfig = { height: '100%', 'row-key': 'id' }
